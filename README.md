@@ -64,10 +64,6 @@ StockPilot 營運系統把接單到分析的流程整理成幾個可核對的步
 - **UTM 歸屬取決於來源資料：** 訂單若缺少 `utm_medium`，系統不會自行推定 KOL 歸屬。
 - **目前以本機單人使用為主：** 尚無帳號權限或自動備份；資料儲存在本機 `.local/workspace.sqlite3`，不會隨 GitHub 儲存庫備份。
 
-## 資料範圍
-
-營運系統使用本專案自己的本機 SQLite 資料庫。它不讀取倉管系統的庫存或出貨資料，也不向倉管端傳送訂單。儲存庫不包含營運資料或資料庫，程式碼上傳 GitHub 也不等於資料已備份。
-
 ## 授權
 
 本專案採用 [MIT License](LICENSE)。第三方 ECharts 的授權與 NOTICE 位於 `web/vendor/echarts-6.1.0/`。
