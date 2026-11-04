@@ -1,18 +1,45 @@
 # StockPilot 營運系統
 
-**把接收訂單、銷售查詢與 KOL 分析放在同一個工作區。**
+**給小型商家使用的輕量營運處理工具：接收訂單、核對銷售，再追查商品與 KOL 歸屬。**
 
-StockPilot 營運系統是從 [StockPilot 原專案](https://github.com/EdChen0321/StockPilot)拆出的獨立作品，聚焦訂單接收與匯入、銷售總覽、銷售查詢，以及 KOL／UTM 分析。營運資料與倉管系統分開保存，不會自動建立出貨或扣除另一套系統的庫存。
+如果你還在用 Excel 整理不同通路的訂單，想把匯入、確認、銷售查詢和 KOL 歸屬整理成清楚的流程，暫時又沒有預算導入大型系統，可以先從這裡試跑日常營運作業。
 
-[功能與操作](#功能與操作) · [開發路線圖](ROADMAP.md) · [訂單與銷售指南](docs/orders-sales.md) · [KOL 分析指南](docs/kol-analysis.md)
+我把五年多的電商營運與內部系統規劃經驗，整理成 StockPilot 營運系統：建立商品與來源、接收或預檢訂單、核對有效銷售，再回查 KOL／UTM 歸屬與原始紀錄。
+
+[快速開始](#快速開始安裝與本機使用方式) · [第一次操作](#第一次操作從這裡開始) · [功能與操作](#功能與操作) · [線上 Demo 狀態](#線上-demo-狀態) · [開發路線圖](ROADMAP.md)
 
 > **專案狀態：開發與驗收中。** 目前以本機單人使用為主；核心頁面已有實作，完整瀏覽器操作驗收、帳號權限與備份還原仍待完成。不建議直接用於正式營運。
 
-## 為什麼做這個專案
+## 這個倉庫解決什麼問題？（專案概覽）
 
-來源不同的訂單與 Excel 檔案，常讓商品名稱、SKU、訂單狀態和 KOL 歸屬難以核對。本系統保留來源、預檢與確認紀錄，把有效訂單的銷售數字和歸因依據整理成可查詢的資料。
+小型商家從不同通路下載訂單後，常要把多份 Excel 合在一起。各通路的 SKU、商品名稱和狀態不一定一致；同一張訂單若重複匯入、修訂或取消，手工加總容易算錯。想核對某筆銷售或 KOL／UTM 歸屬時，也常得回頭逐檔搜尋。
 
-這是獨立的公開產品練習，不包含真實客戶或公司營運資料。
+這個倉庫讓使用者先建立商品與訂單來源，再手動接單，或匯入檔案並預檢後確認。系統保留來源與確認紀錄，銷售總覽和明細可依期間、來源與商品核對；KOL 分析也能回到訂單與歸屬依據。營運資料獨立保存，不會自動建立出貨單或扣除庫存。
+
+## 快速開始：安裝與本機使用方式
+
+**前置條件（Prerequisites）：** Windows PowerShell 和 **Python 3.12 以上**，使用下方的下載指令還需要 Git。先確認 `python --version` 顯示的版本符合要求；沒有 Git 也可以在 GitHub 按 **Code → Download ZIP**，解壓縮後用 PowerShell 進入該資料夾，略過下方的 `git clone` 和 `Set-Location` 兩行。
+
+```powershell
+git clone https://github.com/EdChen0321/StockPilot-Operations.git
+Set-Location StockPilot-Operations
+python --version
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m ops.server
+```
+
+終端機顯示 `Local workspace: http://127.0.0.1:8817` 後，在同一台電腦開啟 **http://127.0.0.1:8817/**。保持 PowerShell 視窗開啟，停止服務時按 `Ctrl+C`。第一次啟動會建立空的 `.local/workspace.sqlite3`；重新啟動會讀取同一份資料。**這份資料庫不會隨 GitHub 儲存庫一起備份**，請自行保存副本。
+
+若 `python` 開啟 Microsoft Store 或顯示找不到指令，請先安裝 Python 3.12 以上，或把上面前兩個 `python` 指令換成電腦上實際的 `python.exe` 路徑；建立虛擬環境後，其餘指令仍使用 `.venv\Scripts\python.exe`。
+
+## 第一次操作，從這裡開始
+
+1. 到「SKU 商品庫」建立一個測試商品，再到「訂單來源管理」建立自己的來源。
+2. 到「接收訂單」手動建立一張測試訂單；保存後，在訂單列表核對來源、狀態和商品明細。
+3. 到「銷售總覽」與「銷售查詢」查看金額與明細。想試檔案匯入時，依[訂單與銷售指南](docs/orders-sales.md)準備指定格式 Excel 或標準 CSV，先預檢，再確認匯入。
+
+預檢本身不會將訂單計入銷售；確認後再核對報表。訂單匯入與 KOL 分析的欄位及限制，分別見[訂單與銷售指南](docs/orders-sales.md)及[KOL 分析指南](docs/kol-analysis.md)。
 
 ## 功能與操作
 
@@ -31,6 +58,21 @@ StockPilot 營運系統是從 [StockPilot 原專案](https://github.com/EdChen03
 - [訂單與銷售指南](docs/orders-sales.md)：手動接單、檔案預檢與銷售查詢。
 - [KOL 分析指南](docs/kol-analysis.md)：KOL 商品對照、Excel 匯入與 UTM 核對。
 
+## 線上 Demo 狀態
+
+免費的瀏覽器互動 Demo 正在製作，預計沿用現有畫面，讓每位訪客以獨立、可重置的合成資料體驗「建立 SKU → 預檢並確認訂單匯入 → 查詢銷售」。隔離技術原型已通過本機合成 CSV 匯入與銷售查詢測試；瀏覽器儲存與既有畫面操作尚未驗收，因此此處暫不提供公開 Demo 網址。正式環境的大量資料與 AI 整合另列為下載後的擴充工作。
+
+## 下載後擴充至正式環境
+
+目前的 `ops/server.py` 只監聽本機，`ops/store.py` 使用單機 SQLite。標準 CSV 匯入在 `ops/importing.py` 限制每批 5,000 列、2 MB；銷售查詢由 `ops/sales.py` 讀取所有現行訂單並回傳全部符合的明細，`web/app.js` 才把明細分成每頁顯示。若要承載上萬筆訂單與多人使用，建議依以下順序修改並驗收：
+
+1. **先建立正式資料邊界。** 在隔離環境備份與匯入來源資料，記錄來源、批次、版本與失敗列；以有身分驗證、角色權限、傳輸加密和資料庫遷移機制的服務取代 `ops/server.py` 的本機適配層。每筆訂單、商品對照與 KOL 資料都要在 API 和資料庫層檢查所屬帳戶；不要把 `.local/`、真實顧客檔案或憑證放進 GitHub。
+2. **把大檔匯入改成可恢復的批次。** 從 `web/order-upload.js`、`ops/importing.py`、`ops/order_excel.py`、`ops/kol_import.py` 及 `ops/store.py` 的預檢／確認交易著手：分段上傳與解析，逐批保存原始檔雜湊、列錯誤和進度，最後以可重試的確認交易套用。先證明重送、修訂、取消與中斷恢復的結果一致，再依目標規模調整目前的 5,000 列／2 MB 限制；單純放寬常數不能解決記憶體與等待時間。
+3. **把查詢與畫面都改成有界。** 在 1 萬、5 萬及預估尖峰筆數的合成資料上，分別量測 `ops/sales.py`、`ops/kol.py`、`web/app.js` 和 `web/kol.js` 的計算時間、回應大小、傳輸及渲染時間。保留銷售總額與有效訂單數的完整口徑，但明細改由伺服器端依條件分頁、排序及匯出；前端只取目前頁，並核對取消訂單、時區、KOL 歸屬及重複匯入不造成數字偏差。
+4. **需要 AI 時只接授權的唯讀資料工具。** 以 `ops/ai_chat.py` 接模型操作，沿用 `ops/ai_queries.py` 的唯讀連線，為銷售、訂單與 KOL 查詢建立明確欄位、帳戶範圍和回傳上限。金鑰只放在伺服器端；回答顯示期間、篩選條件和可追查的來源單據。測試越權提問、提示注入、錯誤數字及逾時情境，不能讓 AI 修改訂單或商品對照。
+
+完成條件是：指定規模與同時使用人數下，匯入可恢復且不重複計算，報表數字可回到來源，權限測試通過，備份可還原。這些能力目前尚未在本作品完成。
+
 ## 資料範圍
 
 營運系統使用本專案自己的本機 SQLite 資料庫。它不讀取倉管系統的庫存或出貨資料，也不向倉管端傳送訂單。儲存庫不包含營運資料或資料庫，程式碼上傳 GitHub 也不等於資料已備份。
@@ -38,3 +80,7 @@ StockPilot 營運系統是從 [StockPilot 原專案](https://github.com/EdChen03
 ## 授權
 
 本專案採用 [MIT License](LICENSE)。第三方 ECharts 的授權與 NOTICE 位於 `web/vendor/echarts-6.1.0/`。
+
+## 聯絡我
+
+我是 [Ed Chen](https://github.com/EdChen0321)。如果你不太會使用、遇到操作問題，或有訂單整理、銷售查詢與 KOL 分析需求，歡迎到本專案的 [GitHub Issues](https://github.com/EdChen0321/StockPilot-Operations/issues) 留言，說明你想完成的工作與目前卡住的步驟。公開留言請勿附上真實顧客、訂單或其他個資。
