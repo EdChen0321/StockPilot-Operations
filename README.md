@@ -1,12 +1,16 @@
 # StockPilot 營運系統
 
-**給小型商家使用的輕量營運系統：匯入訂單、看清銷售狀況，並追查訂單的行銷來源。**
+**訂單匯進來之後，賣了什麼、銷售怎麼變、訂單從哪裡來，都要有資料可查。**
 
-如果你還在用 Excel 整理不同通路的訂單，想看清楚哪些商品賣得好、銷售如何變化，也想用訂單附帶的 UTM 標記核對行銷來源，暫時又沒有預算導入大型系統，可以先從這裡試跑日常營運作業。
+StockPilot 營運系統讓小型商家把分散在 Excel 的訂單整理成可核對的銷售紀錄：
 
-我把五年多的電商營運與內部系統規劃經驗，整理成 StockPilot 營運系統：匯入並核對訂單、查看有效銷售，再以訂單中的 UTM medium 標記追查 KOL 歸屬與原始紀錄。
+- **訂單整理在一起：** 手動接單，或匯入檔案並預檢，確認後再計入銷售。
+- **銷售狀況看得見：** 依期間、來源與商品查看銷售總覽及訂單明細。
+- **行銷來源有依據：** 利用訂單中的 `utm_medium` 核對 KOL 歸屬；缺少標記時不自行推定。
 
-[快速開始](#快速開始安裝與本機使用方式) · [第一次操作](#第一次操作從這裡開始) · [功能與操作](#功能與操作) · [線上 Demo 狀態](#線上-demo-狀態) · [開發路線圖](ROADMAP.md)
+這套流程整理自我五年多的電商營運與內部系統規劃經驗。如果你還在用 Excel 整理多通路訂單，暫時又沒有預算導入大型系統，可以從這裡開始。
+
+[開始使用](#下載並啟動) · [第一次操作](#第一次操作從這裡開始) · [功能與操作](#功能與操作) · [已知問題](#已知問題與使用提醒) · [開發路線圖](ROADMAP.md)
 
 > **專案狀態：開發與驗收中。** 目前以本機單人使用為主；核心頁面已有實作，完整瀏覽器操作驗收、帳號權限與備份還原仍待完成。不建議直接用於正式營運。
 
@@ -18,22 +22,26 @@
 
 **什麼是 UTM？** UTM 是加在行銷連結上的追蹤參數，常見的有標記流量來源的 `utm_source`、標記行銷媒介的 `utm_medium`，以及標記活動的 `utm_campaign`。本系統目前以匯入訂單中的 **UTM medium** 作為 KOL 歸屬的比對欄位；訂單來源與 UTM 標記一起看，才能更清楚追查訂單來自哪個通路、對應哪位 KOL。可參考 [Google Analytics 的 UTM 說明](https://support.google.com/analytics/answer/10917952?hl=zh-Hant)。
 
-## 快速開始：安裝與本機使用方式
+## 下載並啟動
 
-**前置條件（Prerequisites）：** Windows PowerShell 和 **Python 3.12 以上**，使用下方的下載指令還需要 Git。先確認 `python --version` 顯示的版本符合要求；沒有 Git 也可以在 GitHub 按 **Code → Download ZIP**，解壓縮後用 PowerShell 進入該資料夾，略過下方的 `git clone` 和 `Set-Location` 兩行。
+需要 Windows PowerShell、Python 3.12 以上及 Git。在 PowerShell 執行：
 
 ```powershell
 git clone https://github.com/EdChen0321/StockPilot-Operations.git
 Set-Location StockPilot-Operations
-python --version
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe -m ops.server
 ```
 
-終端機顯示 `Local workspace: http://127.0.0.1:8817` 後，在同一台電腦開啟 **http://127.0.0.1:8817/**。保持 PowerShell 視窗開啟，停止服務時按 `Ctrl+C`。第一次啟動會建立空的 `.local/workspace.sqlite3`；重新啟動會讀取同一份資料。**這份資料庫不會隨 GitHub 儲存庫一起備份**，請自行保存副本。
+啟動後，在同一台電腦開啟 **http://127.0.0.1:8817/**。保持 PowerShell 視窗開啟；要停止時按 `Ctrl+C`。
 
-若 `python` 開啟 Microsoft Store 或顯示找不到指令，請先安裝 Python 3.12 以上，或把上面前兩個 `python` 指令換成電腦上實際的 `python.exe` 路徑；建立虛擬環境後，其餘指令仍使用 `.venv\Scripts\python.exe`。
+## 已知問題與使用提醒
+
+- **大量訂單不適合直接使用：** 目前的本機配置尚未針對大量訂單或多人同時使用驗證；標準 CSV 每批最多 5,000 列、2 MB。若有這類需求，需先評估效能並調整部署；也歡迎[聯絡我](#聯絡我)討論合作。
+- **匯入與分析仍待完整驗收：** 新營運包尚未完成真實瀏覽器中的訂單匯入、銷售查詢與 KOL 分析全流程驗收，請先用測試資料試跑。
+- **UTM 歸屬取決於來源資料：** 訂單若缺少 `utm_medium`，系統不會自行推定 KOL 歸屬。
+- **目前以本機單人使用為主：** 尚無帳號權限或自動備份；資料儲存在本機 `.local/workspace.sqlite3`，不會隨 GitHub 儲存庫備份。
 
 ## 第一次操作，從這裡開始
 
@@ -85,4 +93,4 @@ python -m venv .venv
 
 ## 聯絡我
 
-我是 [Ed Chen](https://github.com/EdChen0321)。如果你不太會使用、遇到操作問題，或有訂單整理、銷售查詢與 KOL 分析需求，歡迎到本專案的 [GitHub Issues](https://github.com/EdChen0321/StockPilot-Operations/issues) 留言，說明你想完成的工作與目前卡住的步驟。公開留言請勿附上真實顧客、訂單或其他個資。
+我是 [Ed Chen](https://github.com/EdChen0321)。如果你遇到操作問題，或需要擴充資料量、調整訂單與銷售流程，歡迎到本專案的 [GitHub Issues](https://github.com/EdChen0321/StockPilot-Operations/issues) 留言討論合作。公開留言請勿附上真實顧客、訂單或其他個資。
