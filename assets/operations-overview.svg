@@ -1,29 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
   <title id="title">StockPilot 營運系統專案介紹</title>
-  <desc id="desc">暖色分析看板示意，說明匯入訂單、核對銷售與追查 KOL 歸屬。</desc>
-  <rect width="1200" height="630" fill="#fbf3e8"/>
-  <path d="M0 0H1200V19H0Z" fill="#b9543e"/>
-  <text x="1108" y="83" text-anchor="end" fill="#97442f" font-family="Arial, sans-serif" font-size="21" font-weight="700" letter-spacing="2">STOCKPILOT / OPERATIONS</text>
-  <rect x="59" y="102" width="411" height="440" rx="28" fill="#fffdfa" stroke="#e3d3c3" stroke-width="2"/>
-  <text x="91" y="158" fill="#352d3a" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="29" font-weight="700">銷售總覽</text>
-  <circle cx="409" cy="144" r="7" fill="#d57958"/><circle cx="432" cy="144" r="7" fill="#e8c6a8"/>
-  <path d="M93 214H435M93 275H435M93 336H435M93 397H435" stroke="#eee4da" stroke-width="2"/>
-  <rect x="112" y="312" width="46" height="85" rx="7" fill="#e9ad83"/>
-  <rect x="178" y="267" width="46" height="130" rx="7" fill="#bd6247"/>
-  <rect x="244" y="293" width="46" height="104" rx="7" fill="#e9ad83"/>
-  <rect x="310" y="225" width="46" height="172" rx="7" fill="#bd6247"/>
-  <rect x="376" y="253" width="46" height="144" rx="7" fill="#e9ad83"/>
-  <path d="M93 397H435" stroke="#8f7e7b" stroke-width="2"/>
-  <rect x="91" y="431" width="157" height="69" rx="13" fill="#f9ebdf"/>
-  <text x="111" y="459" fill="#9d513d" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="19" font-weight="700">訂單來源</text>
-  <text x="111" y="485" fill="#40313c" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="21">可核對</text>
-  <rect x="263" y="431" width="172" height="69" rx="13" fill="#eee7f1"/>
-  <text x="283" y="459" fill="#6c597a" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="19" font-weight="700">KOL 歸屬</text>
-  <text x="283" y="485" fill="#40313c" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="21">有資料依據</text>
-  <path d="M532 138H1139M533 448H1139" stroke="#d8bfaa" stroke-width="2"/>
-  <text x="529" y="234" fill="#302b38" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="75" font-weight="800">賣了什麼？</text>
-  <text x="529" y="329" fill="#b9543e" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="75" font-weight="800">訂單從哪裡來？</text>
-  <text x="534" y="399" fill="#5d5862" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="27">匯入訂單，核對銷售與 KOL 歸屬。</text>
-  <text x="534" y="504" fill="#664a50" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="24" font-weight="600">接單 → 核對 → 分析 → 追查來源</text>
-  <text x="1137" y="565" text-anchor="end" fill="#9e8278" font-family="Arial, sans-serif" font-size="18" letter-spacing="2">OPEN SOURCE · 2026</text>
+  <desc id="desc">深藍綠色營運分析圖。左側呈現銷售趨勢、訂單來源與 KOL 歸屬；右側說明訂單及銷售核對。</desc>
+  <defs>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#33515a" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#102b33"/>
+  <rect width="1200" height="630" fill="url(#grid)" opacity=".28"/>
+  <rect width="14" height="630" fill="#8bded5"/>
+
+  <rect x="60" y="112" width="418" height="396" rx="20" fill="#1e4248" stroke="#648b88" stroke-width="2"/>
+  <text x="90" y="164" fill="#f6f4e9" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="29" font-weight="700">銷售總覽</text>
+  <path d="M90 187H448" stroke="#648b88" stroke-width="2"/>
+  <text x="90" y="220" fill="#9dd8d1" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="18">依期間核對銷售趨勢</text>
+  <path d="M91 268H446M91 324H446M91 380H446" stroke="#4d7072" stroke-width="2"/>
+  <rect x="112" y="316" width="39" height="64" rx="5" fill="#4d9794"/>
+  <rect x="174" y="282" width="39" height="98" rx="5" fill="#72c5bd"/>
+  <rect x="236" y="302" width="39" height="78" rx="5" fill="#4d9794"/>
+  <rect x="298" y="249" width="39" height="131" rx="5" fill="#8bded5"/>
+  <rect x="360" y="269" width="39" height="111" rx="5" fill="#72c5bd"/>
+  <path d="M91 380H446" stroke="#a5cfc6" stroke-width="2"/>
+  <path d="M90 404H448" stroke="#648b88" stroke-width="2"/>
+  <text x="91" y="443" fill="#8bded5" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="21" font-weight="700">訂單來源</text>
+  <text x="91" y="477" fill="#f6f4e9" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="20">逐筆核對</text>
+  <path d="M264 422V480" stroke="#648b88" stroke-width="2"/>
+  <text x="286" y="443" fill="#8bded5" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="21" font-weight="700">KOL 歸屬</text>
+  <text x="286" y="477" fill="#f6f4e9" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="20">依 UTM 比對</text>
+
+  <text x="529" y="80" fill="#9dd8d1" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="3">STOCKPILOT / OPERATIONS</text>
+  <path d="M529 105H1134M529 472H1134" stroke="#528080" stroke-width="2"/>
+  <text x="525" y="220" fill="#f6f4e9" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="78" font-weight="800">賣了什麼？</text>
+  <text x="525" y="325" fill="#8bded5" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="78" font-weight="800">訂單從哪裡來？</text>
+  <text x="530" y="394" fill="#d0e1df" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="27">匯入訂單，核對銷售與 KOL 歸屬。</text>
+  <text x="530" y="521" fill="#f6f4e9" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="25" font-weight="600">接單 · 核對 · 分析 · 追查</text>
+  <text x="530" y="566" fill="#9dd8d1" font-family="Noto Sans TC, Microsoft JhengHei, sans-serif" font-size="23">從訂單來源到 KOL 歸屬，都有依據。</text>
+  <text x="1154" y="594" text-anchor="end" fill="#80aba8" font-family="Arial, sans-serif" font-size="17" letter-spacing="2">OPEN SOURCE · 2026</text>
 </svg>
