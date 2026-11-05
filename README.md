@@ -52,10 +52,16 @@ StockPilot 營運系統把接單到分析的流程整理成幾個可核對的步
 
 一個營運流程是：建立本系統的商品對照與訂單來源 → 接收或匯入訂單 → 預檢並確認 → 查看銷售總覽和明細 → 核對 KOL 歸屬。取消訂單保留紀錄，但不計入有效銷售。
 
+## 產品需求文件
+
+[營運與 KOL 分析 PRD](docs/prd/operations-kol.md)：工作中用來對齊流程、開發需求與驗收條件的文件，重點包含 KOL 歸檔、UTM 訂單歸屬、商品表現與原單追查。
+
+[操作 KOL Demo](https://edchen0321.github.io/StockPilot-Demo/?mode=operations)：用合成資料查看每位 KOL 賣了哪些商品，並核對待確認歸屬的訂單。
+
 ## 操作指南
 
 - [訂單與銷售指南](docs/orders-sales.md)：手動接單、檔案預檢與銷售查詢。
-- [KOL 分析指南](docs/kol-analysis.md)：KOL 商品對照、Excel 匯入與 UTM 核對。
+- [KOL 分析指南](docs/kol-analysis.md)：KOL 歸檔、Excel 匯入、商品分析與 UTM 核對。
 
 ## 已知問題與使用提醒
 
